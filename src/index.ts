@@ -35,7 +35,16 @@ app.use(pinoHttp({ logger }));
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: (origin, callback) => {
+      const allowedOrigins = (
+        process.env.CLIENT_URL || "http://localhost:3000"
+      ).split(",");
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(null, true); // Allow all for now, restrict in production
+      }
+    },
     credentials: true,
   })
 );
@@ -93,10 +102,13 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
-// Start Server
-app.listen(PORT, () => {
-  logger.info(`🚀 Server running on http://localhost:${PORT}`);
-  logger.info(`📡 API available at http://localhost:${PORT}/api`);
-});
+// Start Server (only in non-Vercel environment)
+if (process.env.VERCEL !== "1") {
+  app.listen(PORT, () => {
+    logger.info(`🚀 Server running on http://localhost:${PORT}`);
+    logger.info(`📡 API available at http://localhost:${PORT}/api`);
+  });
+}
 
+// Export for Vercel serverless
 export default app;

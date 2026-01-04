@@ -14,6 +14,7 @@ import experienceRoutes from "./routes/experience.routes";
 import profileRoutes from "./routes/profile.routes";
 import projectsRoutes from "./routes/projects.routes";
 import skillsRoutes from "./routes/skills.routes";
+import statsRoutes from "./routes/stats.routes";
 
 dotenv.config();
 
@@ -78,6 +79,7 @@ app.get("/api", (_req: Request, res: Response) => {
       experience: "/api/experience",
       blog: "/api/blog",
       contact: "/api/contact",
+      stats: "/api/stats",
     },
   });
 });
@@ -90,6 +92,7 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/experience", experienceRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/stats", statsRoutes);
 
 // 404 Handler
 app.use((_req: Request, res: Response) => {

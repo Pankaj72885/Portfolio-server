@@ -6,6 +6,15 @@ import helmet from "helmet";
 import pino from "pino";
 import pinoHttp from "pino-http";
 
+// Import routes
+import authRoutes from "./routes/auth.routes";
+import blogRoutes from "./routes/blog.routes";
+import contactRoutes from "./routes/contact.routes";
+import experienceRoutes from "./routes/experience.routes";
+import profileRoutes from "./routes/profile.routes";
+import projectsRoutes from "./routes/projects.routes";
+import skillsRoutes from "./routes/skills.routes";
+
 dotenv.config();
 
 const app: Application = express();
@@ -47,10 +56,31 @@ app.get("/health", (_req: Request, res: Response) => {
   res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-// API Routes (to be added)
+// API Routes
 app.get("/api", (_req: Request, res: Response) => {
-  res.json({ message: "Welcome to Portfolio API", version: "1.0.0" });
+  res.json({
+    message: "Welcome to Portfolio API",
+    version: "1.0.0",
+    endpoints: {
+      auth: "/api/auth",
+      skills: "/api/skills",
+      projects: "/api/projects",
+      profile: "/api/profile",
+      experience: "/api/experience",
+      blog: "/api/blog",
+      contact: "/api/contact",
+    },
+  });
 });
+
+// Mount routes
+app.use("/api/auth", authRoutes);
+app.use("/api/skills", skillsRoutes);
+app.use("/api/projects", projectsRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/experience", experienceRoutes);
+app.use("/api/blog", blogRoutes);
+app.use("/api/contact", contactRoutes);
 
 // 404 Handler
 app.use((_req: Request, res: Response) => {
@@ -66,6 +96,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 // Start Server
 app.listen(PORT, () => {
   logger.info(`🚀 Server running on http://localhost:${PORT}`);
+  logger.info(`📡 API available at http://localhost:${PORT}/api`);
 });
 
 export default app;

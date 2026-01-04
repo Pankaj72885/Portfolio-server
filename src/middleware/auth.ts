@@ -34,20 +34,42 @@ export const authenticate = async (
     const decodedToken = await auth.verifyIdToken(token);
 
     // Find or sync user in database
+    // Find or sync user in database
     let user = await prisma.user.findUnique({
       where: { firebaseUid: decodedToken.uid },
     });
 
     if (!user) {
-      // Create user if not exists (first-time login sync)
-      user = await prisma.user.create({
-        data: {
-          firebaseUid: decodedToken.uid,
-          email: decodedToken.email || "",
-          name: decodedToken.name || null,
-          photoUrl: decodedToken.picture || null,
-        },
-      });
+      // Check if user exists by email (to link existing admin/seeded accounts)
+      if (decodedToken.email) {
+        user = await prisma.user.findUnique({
+          where: { email: decodedToken.email },
+        });
+
+        if (user) {
+          // Link the existing user to this Firebase UID
+          user = await prisma.user.update({
+            where: { id: user.id },
+            data: {
+              firebaseUid: decodedToken.uid,
+              photoUrl: user.photoUrl || decodedToken.picture,
+              name: user.name || decodedToken.name,
+            },
+          });
+        }
+      }
+
+      // If still no user, create new one
+      if (!user) {
+        user = await prisma.user.create({
+          data: {
+            firebaseUid: decodedToken.uid,
+            email: decodedToken.email || "",
+            name: decodedToken.name || null,
+            photoUrl: decodedToken.picture || null,
+          },
+        });
+      }
     }
 
     req.user = {

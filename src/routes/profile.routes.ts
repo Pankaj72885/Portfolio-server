@@ -66,6 +66,7 @@ router.post(
           ...data,
           resumeUrl: data.resumeUrl || null,
           photoUrl: data.photoUrl || null,
+          socialLinks: data.socialLinks ?? {},
         },
       });
 
@@ -100,8 +101,12 @@ router.put(
         where: { id: existing.id },
         data: {
           ...data,
-          resumeUrl: data.resumeUrl || null,
-          photoUrl: data.photoUrl || null,
+          resumeUrl:
+            data.resumeUrl === undefined ? undefined : data.resumeUrl || null,
+          photoUrl:
+            data.photoUrl === undefined ? undefined : data.photoUrl || null,
+          socialLinks:
+            data.socialLinks === undefined ? undefined : data.socialLinks,
         },
       });
 

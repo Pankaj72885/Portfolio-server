@@ -85,7 +85,7 @@ async function main() {
       liveLink: "https://finease-front-end.vercel.app",
       repoLink: "https://github.com/Pankaj72885/finease-front-end",
       image:
-        "https://images.unsplash.com/photo-1554224155-984bb07c278c?q=80&w=2072&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
       featured: true,
       order: 1,
     },
@@ -98,7 +98,7 @@ async function main() {
       liveLink: "https://etuitionbd-client.vercel.app",
       repoLink: "https://github.com/Pankaj72885/eTuitionBd-client",
       image:
-        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
       featured: true,
       order: 2,
     },
@@ -110,7 +110,7 @@ async function main() {
       technologies: ["Node.js", "Express", "MongoDB", "JWT"],
       repoLink: "https://github.com/Pankaj72885/Vehicle-Rental-System-API",
       image:
-        "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80",
       featured: false,
       order: 3,
     },
@@ -122,7 +122,7 @@ async function main() {
       technologies: ["React", "TypeScript", "Chakra UI", "RAWG API"],
       repoLink: "https://github.com/Pankaj72885/game-hub",
       image:
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800&q=80",
       featured: true,
       order: 4,
     },
@@ -134,7 +134,7 @@ async function main() {
       technologies: ["React", "Node.js", "Express", "MongoDB"],
       repoLink: "https://github.com/Pankaj72885/care.xyz",
       image:
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1538108149393-fbbd8189718c?auto=format&fit=crop&w=800&q=80",
       featured: false,
       order: 5,
     },
